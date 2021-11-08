@@ -25,12 +25,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Players
         public async Task OnGetAsync()
         {
             Players = await _context.Player.Include(p => p.PlayerStats).ToListAsync();
-
-            //foreach (var p in Players)
-            //{
-            //    IList<PlayerStats> playerStats = p.PlayerStats.ToList();
-            //    PlayerStats = playerStats[0];
-            //}
+           
         }
     }
 }
