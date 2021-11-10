@@ -59,7 +59,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            return RedirectToPage("./Game/TwoPlayers", new { Player1, Player2} );
+            return RedirectToPage("/Game/TwoPlayers", new { Player1, Player2} );
 
         }
 

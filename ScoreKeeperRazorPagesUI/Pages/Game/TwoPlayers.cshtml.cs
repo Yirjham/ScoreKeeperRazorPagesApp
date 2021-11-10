@@ -16,27 +16,29 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         }
 
         [BindProperty(SupportsGet = true)]
-        public Player Player1 { get; set; }
+        public int ScoreSubtotalP1 { get; set; }
         [BindProperty(SupportsGet = true)]
+        public int ScoreSubtotalP2 { get; set; }
+
+        [BindProperty]
+        public Player Player1 { get; set; }
+
+        [BindProperty]
         public Player Player2 { get; set; }
+
         public IList<Player> Players { get; set; }
         public void OnGet()
         {
-
-
             Players = _context.Player.ToList();
             Player1 = Players[0];
             Player2 = Players[1];
+            Player1.ScoreSubtotal = ScoreSubtotalP1;
+            Player2.ScoreSubtotal = ScoreSubtotalP2;
 
-            if (Player1.ScoreSubtotal == null)
-            {
-                Player1.ScoreSubtotal = 0;
-            }
+            Player1.UpdateRoundSubtotal();
+            Player2.UpdateRoundSubtotal();
 
-            if (Player2.ScoreSubtotal == null)
-            {
-                Player2.ScoreSubtotal = 0;
-            }
+
 
             //Player player1 = Players[0];
             //Player player2 = Players[1];
@@ -45,17 +47,17 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             //Player2 = player2;
         }
 
-        //public IActionResult OnPost()
-        //{
-        //    if (ModelState.IsValid == false)
-        //    {
-        //        return Page();
-        //    }
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
 
-        //    Player1.ScoreSubtotal = Player1.ScoreSubtotal + Player1.RoundScore;
-        //    Player2.ScoreSubtotal = Player2.ScoreSubtotal + Player2.RoundScore;
+            Player1.UpdateRoundSubtotal();
+            Player2.UpdateRoundSubtotal();
 
-
-        //}
+            return RedirectToPage("/Game/TwoPlayers", new {ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal});
+        }
     }
 }
