@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ScoreKeeperRazorPagesUI.Data;
 using ScoreKeeperRazorPagesUI.Models;
 
-namespace ScoreKeeperRazorPagesUI.Pages.Players
+namespace ScoreKeeperRazorPagesUI.Pages.Game
 {
     public class IndexModel : PageModel
     {
@@ -19,12 +19,11 @@ namespace ScoreKeeperRazorPagesUI.Pages.Players
             _context = context;
         }
 
-        public PlayerStats PlayerStats { get; set; }
-        public IList<Player> Players { get;set; }
+        public IList<Player> Player { get;set; }
 
         public async Task OnGetAsync()
         {
-            Players = await _context.Player.Include(p => p.PlayerStats).ToListAsync();
+            Player = await _context.Player.ToListAsync();
         }
     }
 }

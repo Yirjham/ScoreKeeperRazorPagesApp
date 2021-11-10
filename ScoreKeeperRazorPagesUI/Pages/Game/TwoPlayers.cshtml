@@ -1,0 +1,26 @@
+﻿@page
+@model ScoreKeeperRazorPagesUI.Pages.Game.TwoPlayersModel
+@{
+    ViewData["Title"] = "Two-player Game";
+}
+
+<h1>Two-Player Game</h1>
+<hr/>
+
+<form method="post" class="form-horizontal">
+   <div class="row">
+       <div class="col-sm-4"></div>
+       <div class="col-sm-2 mb-2 text-center">Subtotal</div>
+   </div>
+   <div class="row mb-2">
+       <label asp-for="Player1.Name" class="col-form-label col-sm-2">@Model.Player1.Name</label>
+       <input asp-for="Player1.RoundScore" type="number" class="form-control col-sm-2 mr-2" placeholder="Score"/>
+       <input type="number" class="form-control col-sm-2" value="@Model.Player1.ScoreSubtotal" placeholder="Subtotal" readonly/>
+   </div>
+   <div class="row mb-2">
+       <label asp-for="Player2.Name" class="col-form-label col-sm-2">@Model.Player2.Name</label>
+       <input asp-for="Player2.RoundScore" type="number" class="form-control col-sm-2 mr-2" placeholder="Score"/>
+       <input asp-for="Player2.Name" value="@Model.Player1.ScoreSubtotal" type="number" class="form-control col-sm-2" placeholder="Subtotal" readonly/>
+   </div>
+   <button type="submit">Enter</button>
+</form>
