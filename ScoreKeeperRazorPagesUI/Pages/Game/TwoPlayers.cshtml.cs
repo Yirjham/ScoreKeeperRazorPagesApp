@@ -17,6 +17,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
         [BindProperty(SupportsGet = true)]
         public int ScoreSubtotalP1 { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public int ScoreSubtotalP2 { get; set; }
 
@@ -35,8 +36,8 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player1.ScoreSubtotal = ScoreSubtotalP1;
             Player2.ScoreSubtotal = ScoreSubtotalP2;
 
-            Player1.UpdateRoundSubtotal();
-            Player2.UpdateRoundSubtotal();
+            //Player1.UpdateRoundSubtotal();
+            //Player2.UpdateRoundSubtotal();
 
 
 
