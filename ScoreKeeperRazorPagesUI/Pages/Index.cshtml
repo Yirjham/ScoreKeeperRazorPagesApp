@@ -4,7 +4,87 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+
+   <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="img-fluid" src="~/images/a1.jpg" alt="Scrabble Board" height="1300" >
+    </div>
+    <div class="carousel-item">
+      <img class="img-fluid" src="~/images/a2.jpg" alt="Family Playing Scrabble" height="1300">
+    </div>
+    <div class="carousel-item">
+      <img class="img-fluid" src="~/images/a3.jpg" alt="Another Family Playing Scrabble" height="1300">
+    </div>
+  </div>
+
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
 </div>
+
+<div class="text-center jumbotron bg-info"  >
+    <h1 class="display-4">Welcome to Scrabble Scorekeeper</h1>
+    <h3>Say goodbye to pen and paper</h3>
+    <p>With Scrabble Scorekeeper you can easily keep track of the results of your family nights and check your stats later</p>
+</div>
+
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action list-group-item-success text-center">Two Players</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-info text-center">Three Players</a>
+  <a href="#" class="list-group-item list-group-item-action list-group-item-primary text-center">Four Players</a>
+</div>
+
+
+@*
+<div class="row">
+    <div class="col">
+        <div class="card" style="width:400px">
+            <img class="card-img-top rounded-lg" src="~/images/two.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                     <h4 class="card-title text-center">2 PLAYERS</h4>
+                     <a href="#" class="btn btn-info">Start Game</a>
+                </div>
+        </div>
+    </div>
+    
+    
+
+     <div class="col">
+         <div class="card" style="width:400px">
+            <img class="card-img-top" src="~/images/three.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                     <h4 class="card-title text-center">3 PLAYERS</h4>
+                     <a href="#" class="btn btn-info">Start Game</a>
+                </div>
+        </div>
+    </div>
+
+      
+
+     <div class="col">
+         <div class="card" style="width:400px">
+            <img class="card-img-top" src="~/images/four.jpg" alt="Card image" style="width:100%">
+                <div class="card-body">
+                     <h4 class="card-title text-center">4 PLAYERS</h4>
+                     <a href="#" class="btn btn-info">Start Game</a>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="text-center jumbotron bg-info" style="background-color:aliceblue">
+    <h1 class="display-4">Number of Players</h1>
+    <h3>Select the Amount of Players</h3>
+   
+</div>*@
