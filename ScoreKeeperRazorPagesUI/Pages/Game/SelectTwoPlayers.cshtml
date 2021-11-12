@@ -13,7 +13,7 @@
 <div class="row pb-2">
     <div class="col-md-6" style="background-color: #c3e6cb;">
         <form method="post">
-            <h2>Add new player</h2>
+            <h2 class="p-3">Add new player</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -30,7 +30,7 @@
 
     <div class="col-md-6" style="background-color: #bee5eb;">
         <form method="post" asp-page-handler="TwoPlayers">
-        <h2>Select two existing players</h2>
+        <h2 class="p-3">Select two existing players</h2>
         <hr />
           <select class="form-control w-50 mb-2" asp-for="@Model.Player1.Name">
             <option value="" selected disabled hidden>Select Player 1</option>
