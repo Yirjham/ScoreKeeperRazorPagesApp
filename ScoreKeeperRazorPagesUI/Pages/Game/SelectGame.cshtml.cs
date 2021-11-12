@@ -26,31 +26,6 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         {
             Players = _context.Player.ToList();
 
-            if (Players.Count <= 1)
-            {
-                Players.Add(new Player { Name = "Player 2" });
-                Players.Add(new Player { Name = "Player 3" });
-                Players.Add(new Player { Name = "Player 4" });
-                Players.Add(new Player { Name = "Player 5" });
-            }
-
-            if (Players.Count <= 2)
-            {
-                Players.Add(new Player { Name = "Player 3" });
-                Players.Add(new Player { Name = "Player 4" });
-                Players.Add(new Player { Name = "Player 5" });
-            }
-
-            if (Players.Count <= 3)
-            {
-                Players.Add(new Player { Name = "Player 4" });
-                Players.Add(new Player { Name = "Player 5" });
-            }
-
-            if (Players.Count <= 4)
-            {
-                Players.Add(new Player { Name = "Player 5" });
-            }
         }
         public IActionResult OnPostTwoPlayers()
         {
@@ -59,18 +34,28 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            return RedirectToPage("/Game/TwoPlayers", new { Player1, Player2} );
+            return RedirectToPage("/Game/TwoPlayers", new { Player1.Name, Player2} );
 
         }
 
-        public void OnPostThreePlayers()
+        public IActionResult OnPostThreePlayers()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
+            return RedirectToPage("/Game/ThreePlayers", new { Player1, Player2 });
         }
 
-        public void OnPostFourPlayers()
+        public IActionResult OnPostFourPlayers()
         {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
+            return RedirectToPage("/Game/FourPlayers", new { Player1, Player2 });
         }
     }
 }

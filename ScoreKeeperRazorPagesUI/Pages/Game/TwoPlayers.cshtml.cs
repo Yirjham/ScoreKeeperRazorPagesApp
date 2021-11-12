@@ -21,6 +21,12 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty(SupportsGet = true)]
         public int ScoreSubtotalP2 { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string Player1Name { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Player2Name { get; set; }
+
         [BindProperty]
         public Player Player1 { get; set; }
 
@@ -31,12 +37,12 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         public void OnGet()
         {
             Players = _context.Player.ToList();
-            Player1 = Players[0];
-            Player2 = Players[1];
+            Player1 = Players.Where(x => x.Name == Player1Name).FirstOrDefault();
+            Player2 = Players.Where(x => x.Name == Player2Name).FirstOrDefault();
+            //Player1 = Players[0];
+            //Player2 = Players[1];
             Player1.ScoreSubtotal = ScoreSubtotalP1;
             Player2.ScoreSubtotal = ScoreSubtotalP2;
-
-         
         }
 
         public IActionResult OnPost()
