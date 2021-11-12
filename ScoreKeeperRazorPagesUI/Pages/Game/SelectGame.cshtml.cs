@@ -17,9 +17,14 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
         [BindProperty]
         public Player Player1 { get; set; }
+
         [BindProperty]
         public Player Player2 { get; set; }
+
+        [BindProperty]
         public Player Player3 { get; set; }
+
+        [BindProperty]
         public Player Player4 { get; set; }
         public IList<Player> Players { get; set; }
         public void OnGet()
@@ -34,7 +39,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            return RedirectToPage("/Game/TwoPlayers", new { Player1.Name, Player2} );
+            return RedirectToPage("/Game/TwoPlayers", new {Player1Name = Player1.Name, Player2Name = Player2.Name} );
 
         }
 
@@ -45,7 +50,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            return RedirectToPage("/Game/ThreePlayers", new { Player1, Player2 });
+            return RedirectToPage("/Game/ThreePlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name });
         }
 
         public IActionResult OnPostFourPlayers()
@@ -55,7 +60,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            return RedirectToPage("/Game/FourPlayers", new { Player1, Player2 });
+            return RedirectToPage("/Game/FourPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name, Player4Name = Player4.Name });
         }
     }
 }

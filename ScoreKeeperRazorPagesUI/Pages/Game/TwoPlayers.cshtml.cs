@@ -39,8 +39,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Players = _context.Player.ToList();
             Player1 = Players.Where(x => x.Name == Player1Name).FirstOrDefault();
             Player2 = Players.Where(x => x.Name == Player2Name).FirstOrDefault();
-            //Player1 = Players[0];
-            //Player2 = Players[1];
+
             Player1.ScoreSubtotal = ScoreSubtotalP1;
             Player2.ScoreSubtotal = ScoreSubtotalP2;
         }
@@ -55,7 +54,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player1.UpdateRoundSubtotal();
             Player2.UpdateRoundSubtotal();
 
-            return RedirectToPage("/Game/TwoPlayers", new {ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal});
+            return RedirectToPage("/Game/TwoPlayers", new {ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name });
         }
     }
 }
