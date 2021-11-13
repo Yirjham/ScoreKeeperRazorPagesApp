@@ -33,7 +33,17 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         public Player Player { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            return RedirectToPage("/Game/TwoPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name });
+        }
+
+        public async Task<IActionResult> OnPostStayInPageAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -43,13 +53,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             _context.Player.Add(Player);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Game/TwoPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name });
+            return RedirectToPage("/Game/SelectTwoPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name });
         }
     }
-    //public class SelectTwoPlayersModel : PageModel
-    //{
-    //    public void OnGet()
-    //    {
-    //    }
-    //}
 }
