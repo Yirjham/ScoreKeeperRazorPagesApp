@@ -1,0 +1,79 @@
+﻿@page
+@model ScoreKeeperRazorPagesUI.Pages.Game.SelectFourPlayersModel
+@{
+    ViewData["Title"] = "Select Four Players";
+}
+
+<div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-5">Add a new player or select an existing one</h1>
+</div>
+
+<div class="container pb-2">
+<div class="row pb-2">
+    <div class="col-md-6" style="background-color: #bee5eb; ">
+        <form method="post" asp-page-handler="StayInPage">
+            <h2 style="color: #17a2b8" class="p-3">Add new player</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Player.Name" class="form-control w-50" placeholder="Add player" />
+                <span asp-validation-for="Player.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+
+
+    <div class="col-md-6" style="background-color: #bee5eb;">
+        <form method="post" asp-page-handler="TwoPlayers">
+        <h2 style="color: #17a2b8" class="p-3">Select two existing players</h2>
+        <hr />
+          <select class="form-control w-50 mb-2" asp-for="@Model.Player1.Name">
+            <option value="" selected disabled hidden>Select Player 1</option>
+            @foreach(var player in @Model.Players)
+            {
+                <option>@player.Name</option>
+            }
+            
+          </select>
+
+          <select class="form-control w-50 mb-2" asp-for="@Model.Player2.Name">
+            <option value="" selected disabled hidden>Select Player 2</option>
+            @foreach(var player in @Model.Players)
+            {
+                <option>@player.Name</option>
+            }
+          </select>
+
+           <select class="form-control w-50 mb-2" asp-for="@Model.Player3.Name">
+            <option value="" selected disabled hidden>Select Player 2</option>
+            @foreach(var player in @Model.Players)
+            {
+                <option>@player.Name</option>
+            }
+          </select>
+
+          <select class="form-control w-50 mb-2" asp-for="@Model.Player4.Name">
+            <option value="" selected disabled hidden>Select Player 2</option>
+            @foreach(var player in @Model.Players)
+            {
+                <option>@player.Name</option>
+            }
+          </select>
+
+          <div>
+                <input type="submit" value="Start" class="btn btn-info mb-2" />
+          </div>
+          </form>
+    </div>
+</div>
+<div>
+    </div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

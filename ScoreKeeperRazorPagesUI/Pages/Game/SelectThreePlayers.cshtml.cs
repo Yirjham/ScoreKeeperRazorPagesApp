@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ScoreKeeperRazorPagesUI.Pages.Game
 {
-    public class SelectTwoPlayersModel : PageModel
+    public class SelectThreePlayersModel : PageModel
     {
         private readonly ScoreKeeperRazorPagesUI.Data.ScoreKeeperRazorPagesUIContext _context;
 
-        public SelectTwoPlayersModel(ScoreKeeperRazorPagesUI.Data.ScoreKeeperRazorPagesUIContext context)
+        public SelectThreePlayersModel(ScoreKeeperRazorPagesUI.Data.ScoreKeeperRazorPagesUIContext context)
         {
             _context = context;
         }
@@ -21,6 +21,9 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
         [BindProperty]
         public Player Player2 { get; set; }
+
+        [BindProperty]
+        public Player Player3 { get; set; }
 
         [BindProperty]
         public Player Player { get; set; }
@@ -38,7 +41,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            return RedirectToPage("/Game/TwoPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name });
+            return RedirectToPage("/Game/ThreePlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name });
         }
 
         public async Task<IActionResult> OnPostStayInPageAsync()
@@ -51,7 +54,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             _context.Player.Add(Player);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Game/SelectTwoPlayers");
+            return RedirectToPage("/Game/SelectThreePlayers");
         }
     }
 }

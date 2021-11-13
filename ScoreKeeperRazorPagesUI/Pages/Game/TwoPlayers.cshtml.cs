@@ -56,5 +56,18 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
             return RedirectToPage("/Game/TwoPlayers", new {ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name });
         }
+
+        public IActionResult OnPostWinner()
+        {
+            if (ModelState.IsValid == false)
+            {
+                return Page();
+            }
+
+            Player1.UpdateRoundSubtotal();
+            Player2.UpdateRoundSubtotal();
+
+            return RedirectToPage("/Game/TwoPlayers", new { ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name });
+        }
     }
 }
