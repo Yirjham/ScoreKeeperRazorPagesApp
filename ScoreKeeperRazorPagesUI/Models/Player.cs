@@ -26,6 +26,7 @@ namespace ScoreKeeperRazorPagesUI.Models
         public int ScoreSubtotal { get; set; } = 0;
         [NotMapped]
         public int TotalScore { get; private set; }
+        [InverseProperty("Category")]
         public ICollection<PlayerStats> PlayerStats { get; set; }
 
         public void UpdateRoundSubtotal()

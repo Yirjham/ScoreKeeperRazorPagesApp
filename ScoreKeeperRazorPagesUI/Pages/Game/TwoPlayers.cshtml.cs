@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using ScoreKeeperRazorPagesUI.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty]
         public Player Player2 { get; set; }
 
+        public PlayerStats CurrentGameStat { get; set; }
+
         public IList<Player> Players { get; set; }
         public void OnGet()
         {
@@ -64,8 +67,26 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 return Page();
             }
 
-            Player1.UpdateRoundSubtotal();
-            Player2.UpdateRoundSubtotal();
+            Player1.UpdateFinalScore();
+            Player2.UpdateFinalScore();
+
+            
+
+            if (Player1.TotalScore > Player2.TotalScore)
+            {
+                var winner = _context.Player.Include(ps => ps.PlayerStats).Where(p => p.Name == Player1.Name).FirstOrDefault();
+
+                if (winner != null)
+                {
+                    foreach (var stat in winner.PlayerStats)
+                    {
+
+                    }
+                }
+                    
+            }
+
+            
 
             return RedirectToPage("/Game/TwoPlayers", new { ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name });
         }
