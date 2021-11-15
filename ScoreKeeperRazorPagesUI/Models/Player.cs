@@ -20,14 +20,16 @@ namespace ScoreKeeperRazorPagesUI.Models
         }
         public int ID { get; set; }
         public string Name { get; set; }
+        public int GamesPlayed { get; set; } = 0;
+        public int GamesWon { get; set; } = 0;
+        public int HighestGameScore { get; set; } = 0;
+
         [NotMapped]
         public int RoundScore { get; set; } = 0;
         [NotMapped]
         public int ScoreSubtotal { get; set; } = 0;
         [NotMapped]
-        public int TotalScore { get; private set; }
-        [InverseProperty("Category")]
-        public ICollection<PlayerStats> PlayerStats { get; set; }
+        public int TotalScore { get; set; }
 
         public void UpdateRoundSubtotal()
         {

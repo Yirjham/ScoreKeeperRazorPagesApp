@@ -33,9 +33,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
         [BindProperty]
         public Player Player2 { get; set; }
-
-        public PlayerStats CurrentGameStat { get; set; }
-
+       
         public IList<Player> Players { get; set; }
         public void OnGet()
         {
@@ -70,25 +68,39 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player1.UpdateFinalScore();
             Player2.UpdateFinalScore();
 
-            
+            int p1TotalScoreTemp = Player1.TotalScore;
+            int p2TotalScoreTemp = Player2.TotalScore;
+
+            Player1 =_context.Player.Where(p => p.Name == Player1.Name).FirstOrDefault();
+            Player2 =_context.Player.Where(p => p.Name == Player2.Name).FirstOrDefault();
+
+            Player1.TotalScore = p1TotalScoreTemp;
+            Player2.TotalScore = p2TotalScoreTemp;
+
+            Player1.GamesPlayed++;
+            Player2.GamesPlayed++;
 
             if (Player1.TotalScore > Player2.TotalScore)
             {
-                var winner = _context.Player.Include(ps => ps.PlayerStats).Where(p => p.Name == Player1.Name).FirstOrDefault();
-
-                if (winner != null)
-                {
-                    foreach (var stat in winner.PlayerStats)
-                    {
-
-                    }
-                }
-                    
+                Player1.GamesWon++;
+            }
+            else if (Player1.TotalScore < Player2.TotalScore)
+            {
+                Player2.GamesWon++;
             }
 
-            
+            if (Player1.HighestGameScore < Player1.TotalScore)
+            {
+                Player1.HighestGameScore = Player1.TotalScore;
+            }
 
-            return RedirectToPage("/Game/TwoPlayers", new { ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name });
+            if (Player2.HighestGameScore < Player2.TotalScore)
+            {
+                Player2.HighestGameScore = Player2.TotalScore;
+            }
+
+            _context.SaveChanges();
+            return RedirectToPage("/Game/Scoreboard");
         }
     }
 }

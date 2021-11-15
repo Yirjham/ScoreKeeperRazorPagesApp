@@ -25,21 +25,6 @@ namespace ScoreKeeperRazorPagesUI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Player");
-                });
-
-            modelBuilder.Entity("ScoreKeeperRazorPagesUI.Models.PlayerStats", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("GamesPlayed")
                         .HasColumnType("int");
 
@@ -49,30 +34,12 @@ namespace ScoreKeeperRazorPagesUI.Migrations
                     b.Property<int>("HighestGameScore")
                         .HasColumnType("int");
 
-                    b.Property<int>("PlayerID")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PlayerID");
-
-                    b.ToTable("PlayerStats");
-                });
-
-            modelBuilder.Entity("ScoreKeeperRazorPagesUI.Models.PlayerStats", b =>
-                {
-                    b.HasOne("ScoreKeeperRazorPagesUI.Models.Player", "Player")
-                        .WithMany("PlayerStats")
-                        .HasForeignKey("PlayerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("ScoreKeeperRazorPagesUI.Models.Player", b =>
-                {
-                    b.Navigation("PlayerStats");
+                    b.ToTable("Player");
                 });
 #pragma warning restore 612, 618
         }
