@@ -98,5 +98,7 @@ namespace ScoreKeeperRazorPagesUI.CalculationLibrary
                 return false;
             }
         }
+
+       
     }
 }
