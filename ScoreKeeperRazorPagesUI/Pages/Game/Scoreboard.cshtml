@@ -5,11 +5,13 @@
     ViewData["Title"] = "Scoreboard";
 }
 
-<h1>Scoreboard</h1>
+<div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-5">Scoreboard</h1>
+</div>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
-        <tr>
+        <tr class="table-info rounded-lg">
             <th>
                 @Html.DisplayNameFor(model => model.Player[0].Name)
             </th>
@@ -27,8 +29,8 @@
     </thead>
     <tbody>
 @foreach (var item in Model.Player) {
-        <tr>
-            <td>
+        <tr class="table-info">
+            <td pt-2>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
