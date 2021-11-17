@@ -19,7 +19,6 @@ namespace ScoreKeeperRazorPagesUI.Pages.Players
             _context = context;
         }
 
-        public PlayerStats PlayerStats { get; set; }
         public Player Player { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -29,15 +28,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Players
                 return NotFound();
             }
 
-            Player = await _context.Player.Include(p => p.PlayerStats).FirstOrDefaultAsync(m => m.ID == id);
-
-            IList<PlayerStats> playerStats = Player.PlayerStats.ToList();
-            PlayerStats = playerStats[0];
-
-            //PlayerStats.GamesPlayed = Player.PlayerStats.First().GamesPlayed;
-            //PlayerStats.GamesWon = Player.PlayerStats.FirstOrDefault(m => m.PlayerID == id).GamesWon;
-            //PlayerStats.HighestGameScore = Player.PlayerStats.FirstOrDefault(m => m.PlayerID == id).HighestGameScore;
-            
+            Player = await _context.Player.FirstOrDefaultAsync(m => m.ID == id);
 
             if (Player == null)
             {

@@ -1,0 +1,51 @@
+﻿@page
+@model ScoreKeeperRazorPagesUI.Pages.Game.ScoreboardModel
+
+@{
+    ViewData["Title"] = "Scoreboard";
+}
+
+<div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-5">Scoreboard</h1>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-info rounded-lg">
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].Name)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Player[0].HighestGameScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].GamesPlayed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Player[0].GamesWon)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Player) {
+        <tr class="table-info">
+            <td pt-2>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HighestGameScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GamesPlayed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GamesWon)
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

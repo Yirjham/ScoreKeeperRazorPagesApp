@@ -1,45 +1,103 @@
 ﻿@page
+@using ScoreKeeperRazorPagesUI.Models
+@using ScoreKeeperRazorPagesUI.CalculationLibrary
 @model ScoreKeeperRazorPagesUI.Pages.Game.FourPlayersModel
 @{
     ViewData["Title"] = "Three Players";
 }
 
-<h1>Four-Player Game</h1>
-<hr/>
+<div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-5">Scrabble for Two</h1>
+</div>
 
+
+<div class="container rounded-lg" style="background-color: #bee5eb;" >
 <form method="post" class="form-horizontal">
-   <div class="row">
-       <div style="font-size: 16px" class="col-sm-2 p-2 badge badge-info m-2">Players</div>
-       <div style="font-size: 16px" class="col-sm-2 p-2 badge badge-info m-2">Score</div>
-       <div style="font-size: 16px" class="col-sm-2 p-2 badge badge-info m-2">Subtotal</div>
+   <div class="row justify-content-center pt-4">
+       <div style="font-size: 16px" class="col-sm-2 pb-2 badge badge-info m-2">Players</div>
+       <div style="font-size: 16px" class="col-sm-2 pb-2 badge badge-info m-2">Score</div>
+       <div style="font-size: 16px" class="col-sm-2 pb-2 badge badge-info m-2">Subtotal</div>
    </div>
-   <div class="row">
-       <label asp-for="Player1.Name" style="font-size: 16px" class="col-form-label col-sm-2 m-2 badge badge-info">@Model.Player1.Name</label>
+   <div class="row justify-content-center">
+       <label asp-for="Player1.Name" style="font-size: 16px" class="col-form-label pt-2 col-sm-2 m-2 badge badge-info">@Model.Player1.Name</label>
        <input asp-for="Player1.RoundScore" type="number" class="form-control col-sm-2 m-2" placeholder="Score"/>
        <input asp-for="Player1.ScoreSubtotal" type="number" class="form-control col-sm-2 m-2" placeholder="Subtotal" readonly/>
        <input asp-for="Player1.Name" type="hidden" />
    </div>
-   <div class="row">
-       <label asp-for="Player2.Name" style="font-size: 16px" class="col-form-label col-sm-2 m-2 badge badge-info">@Model.Player2.Name</label>
+   <div class="row justify-content-center">
+       <label asp-for="Player2.Name" style="font-size: 16px" class="col-form-label pt-2 col-sm-2 m-2 badge badge-info">@Model.Player2.Name</label>
        <input asp-for="Player2.RoundScore" type="number" class="form-control col-sm-2 m-2" placeholder="Score"/>
        <input asp-for="Player2.ScoreSubtotal" type="number" class="form-control col-sm-2 m-2" placeholder="Subtotal" readonly/>
        <input asp-for="Player2.Name" type="hidden" />
    </div>
-    <div class="row">
-       <label asp-for="Player3.Name" style="font-size: 16px" class="col-form-label col-sm-2 m-2 badge badge-info">@Model.Player3.Name</label>
+    <div class="row justify-content-center">
+       <label asp-for="Player3.Name" style="font-size: 16px" class="col-form-label pt-2 col-sm-2 m-2 badge badge-info">@Model.Player3.Name</label>
        <input asp-for="Player3.RoundScore" type="number" class="form-control col-sm-2 m-2" placeholder="Score"/>
        <input asp-for="Player3.ScoreSubtotal" type="number" class="form-control col-sm-2 m-2" placeholder="Subtotal" readonly/>
        <input asp-for="Player3.Name" type="hidden" />
    </div>
-   <div class="row">
-       <label asp-for="Player4.Name" style="font-size: 16px" class="col-form-label col-sm-2 m-2 badge badge-info">@Model.Player4.Name</label>
+   <div class="row justify-content-center">
+       <label asp-for="Player4.Name" style="font-size: 16px" class="col-form-label pt-2 col-sm-2 m-2 badge badge-info">@Model.Player4.Name</label>
        <input asp-for="Player4.RoundScore" type="number" class="form-control col-sm-2 m-2" placeholder="Score"/>
        <input asp-for="Player4.ScoreSubtotal" type="number" class="form-control col-sm-2 m-2" placeholder="Subtotal" readonly/>
        <input asp-for="Player4.Name" type="hidden" />
    </div>
-   <div class="row">
-       <div class="col-sm-1">
-             <button class="btn btn-info" type="submit">Enter</button>
+    <div class="row justify-content-center p-2">
+       <div class="col-5 ml-3" ></div>
+       <div class="col-1 ml-5">
+             <button class="btn btn-info mb-2" type="submit">Enter</button>
        </div>
    </div>
+
+
+   <div class="row list-group">
+       <button type="button" class="list-group-item list-group-item-action list-group-item-primary text-center" data-toggle="modal" data-target="#myModal">End Game</button>
+
+       <!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+
+         @functions 
+         {
+            public string DetermineWinner(Player p1, Player p2, Player p3, Player p4)
+            {
+               if(Calculations.IsThereAWinner(p1.ScoreSubtotal, p2.ScoreSubtotal, p3.ScoreSubtotal, p4.ScoreSubtotal))
+               {
+                   Player GameWinner = Calculations.DeterminesWinner(p1, p2, p3, p4);
+                   return $"Congratulations {GameWinner.Name}!";
+               }
+               return "What are the odds? It's a tie!!!";
+            }
+         }
+            @if(@Model.Player1.ScoreSubtotal == 0 && @Model.Player2.ScoreSubtotal == 0 && @Model.Player3.ScoreSubtotal == 0 && @Model.Player4.ScoreSubtotal == 0)
+            {
+                <h4 class="modal-title">Oops, no one has won yet! You should play first</h4>
+            }
+            else
+            {
+                <h4 class="modal-title">@DetermineWinner(@Model.Player1, @Model.Player2, @Model.Player3, @Model.Player4)</h4>
+            }
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Click on END GAME to see the scoreboard, or CLOSE to keep playing.
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button asp-page-handler="Winner" type="submit" class="btn btn-danger">End Game</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+   </div>
 </form>
+</div>
