@@ -7,7 +7,7 @@
 }
 
 <div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
-    <h1 class="display-5">Scrabble for Two</h1>
+    <h1 class="display-5">SCRABBLE FOR TWO</h1>
 </div>
 
 
@@ -37,7 +37,11 @@
        <input asp-for="Player3.Name" type="hidden" />
    </div>
     <div class="row justify-content-center p-2">
-       <div class="col-5 ml-3" ></div>
+       <div class="col-5 ml-3" >
+           <span asp-validation-for="Player1.RoundScore" class="error text-danger"></span>
+           <span asp-validation-for="Player2.RoundScore" class="error text-danger"></span>
+           <span asp-validation-for="Player3.RoundScore" class="error text-danger"></span>
+       </div>
        <div class="col-1 ml-5">
              <button class="btn btn-info mb-2" type="submit">Enter</button>
        </div>

@@ -28,6 +28,8 @@ namespace ScoreKeeperRazorPagesUI.Models
         [Display(Name = "HIGHEST SCORE")]
         public int HighestGameScore { get; set; } = 0;
 
+        [Display(Name = "Score")]
+        [Range(0, 330)]
         [NotMapped]
         public int RoundScore { get; set; } = 0;
         [NotMapped]
