@@ -73,24 +73,24 @@
 
         @if(@Model.Player1.ScoreSubtotal == 0 && @Model.Player2.ScoreSubtotal == 0 && @Model.Player3.ScoreSubtotal == 0)
         {
-            <h4 class="modal-title">Oops, no one has won yet! You should play first</h4>
+            <h4 class="modal-title text-center">Oops, no one has won yet! You should play first</h4>
         }
         else
         {
-            <h4 class="modal-title">@DetermineWinner(@Model.Player1, @Model.Player2, @Model.Player3)</h4>
+            <h4 class="modal-title text-center">@DetermineWinner(@Model.Player1, @Model.Player2, @Model.Player3)</h4>
         }
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        Finish the game to check out the latest stats.
+        Click <strong>END GAME</strong> to be directed to the scoreboard, or <strong>CLOSE</strong> to keep playing.
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button asp-page-handler="Winner" type="submit" class="btn btn-danger">End Game</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+        <button asp-page-handler="Winner" type="submit" class="btn btn-info">End Game</button>
       </div>
 
     </div>
