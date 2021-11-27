@@ -19,6 +19,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty]
         public Player Player { get; set; }
         public IList<Player> Players { get; set; }
+
         public void OnGet()
         {
             Players = _context.Player.ToList();
@@ -33,7 +34,14 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
             Players = _context.Player.ToList();
 
-            if (Players.Contains(Player) == false)
+            List<Player> nameExists = Players.Where(p => p.Name == Player.Name).ToList();
+
+            if (nameExists.Count != 0)
+            {
+                return Page();
+            }
+
+            if (nameExists.Count == 0)
             {
                 _context.Player.Add(Player);
                 await _context.SaveChangesAsync();

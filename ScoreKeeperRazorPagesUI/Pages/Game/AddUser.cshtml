@@ -27,30 +27,26 @@
 
             <!-- The Modal -->
   <div class="modal" id="myModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
       <div class="modal-content">
       
         <!-- Modal Header -->
         <div class="modal-header">
-                                @if(@Model.Players.Contains(@Model.Player) == false)
-                                {
-                                    <h4 class="modal-title">User has been added</h4>
-                                }
-                                else
-                                {
-                                    <h4 class="modal-title">User already exists</h4>
-                                }
+           
+              <h4 class="modal-title">Are you sure you want to add this user?</h4>
+                 
           
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         @* <button type="button" class="close" data-dismiss="modal">&times;</button>*@
         </div>
         
         <!-- Modal body -->
         <div class="modal-body">
-          Click Close to add another user or Click Play to select the users for today's game
+          Click <strong>Add</strong> if you want to proceed or <strong>Close</strong> if you think this user already exists
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
+          <button type="submit" asp-page-handler="StayInPage" class="btn btn-danger">Add</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         
@@ -61,13 +57,16 @@
 
         </form>
     </div>
-
-
     
+</div> 
 </div>
-<div>
-    </div>
-    <a asp-page="Index">Back to List</a>
+
+<div class="row pb-2 ml-1">
+    <div class="col-md-12 list-group">
+  <a asp-page="/Game/SelectTwoPlayers" class="list-group-item list-group-item-action list-group-item-success text-center">Two Players</a>
+  <a asp-page="/Game/SelectThreePlayers" class="list-group-item list-group-item-action list-group-item-info text-center">Three Players</a>
+  <a asp-page="/Game/SelectFourPlayers" class="list-group-item list-group-item-action list-group-item-primary text-center">Four Players</a>
+</div>
 </div>
 
 @section Scripts {

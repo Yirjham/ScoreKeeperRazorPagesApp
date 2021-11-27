@@ -22,8 +22,8 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty]
         public Player Player2 { get; set; }
 
-        [BindProperty]
-        public Player Player { get; set; }
+        //[BindProperty]
+        //public Player Player { get; set; }
 
 
         public IList<Player> Players { get; set; }
@@ -32,8 +32,15 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         {
             Players = _context.Player.ToList();
         }
+
         public IActionResult OnPost()
         {
+            if (Player1 != null && Player1.Name == Player2.Name)
+            {
+                ModelState.AddModelError("Player1.Name", "You need to select different players to proceed");
+                Players = _context.Player.ToList();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -42,17 +49,17 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             return RedirectToPage("/Game/TwoPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name });
         }
 
-        public async Task<IActionResult> OnPostStayInPageAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+        //public async Task<IActionResult> OnPostStayInPageAsync()
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return Page();
+        //    }
 
-            _context.Player.Add(Player);
-            await _context.SaveChangesAsync();
+        //    _context.Player.Add(Player);
+        //    await _context.SaveChangesAsync();
 
-            return RedirectToPage("/Game/SelectTwoPlayers");
-        }
+        //    return RedirectToPage("/Game/SelectTwoPlayers");
+        //}
     }
 }
