@@ -14,10 +14,18 @@ namespace ScoreKeeperRazorPagesUI.Models
 
         }
         public int ID { get; set; }
+
+        [Display(Name = "NAME")]
         [Required]
         public string Name { get; set; }
+
+        [Display(Name = "GAMES PLAYED")]
         public int GamesPlayed { get; set; } = 0;
+
+        [Display(Name = "GAMES WON")]
         public int GamesWon { get; set; } = 0;
+
+        [Display(Name = "HIGHEST SCORE")]
         public int HighestGameScore { get; set; } = 0;
 
         [NotMapped]
