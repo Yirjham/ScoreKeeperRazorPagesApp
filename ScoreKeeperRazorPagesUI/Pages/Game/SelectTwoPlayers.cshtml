@@ -5,7 +5,7 @@
 }
 
 <div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
-    <h1 class="display-5">Add a new player or select an existing one</h1>
+    <h1 class="display-5">SCOREKEEPER</h1>
 </div>
 
 <div class="container pb-2">
@@ -26,12 +26,12 @@
     </div>*@
 
     
-    <div class="col-md-12" style="background-color: #bee5eb;">
-        <form method="post" asp-page-handler="TwoPlayers">
-        <h2 style="color: #17a2b8" class="p-3">Select two existing players</h2>
+    <div class="col-md-12 pb-1" style="background-color: #bee5eb;">
+        <form method="post">
+        <h2 style="color: #17a2b8" class="p-3">Select two existing users</h2>
         <hr />
           <select class="form-control w-25 mb-2" asp-for="@Model.Player1.Name">
-            <option value="" selected disabled hidden>Select Player 1</option>
+            <option value="" selected disabled hidden>Select User 1</option>
             @foreach(var player in @Model.Players)
             {
                 <option>@player.Name</option>
@@ -39,7 +39,7 @@
             
           </select>
           <select class="form-control w-25 mb-2" asp-for="@Model.Player2.Name">
-            <option value="" selected disabled hidden>Select Player 2</option>
+            <option value="" selected disabled hidden>Select User 2</option>
             @foreach(var player in @Model.Players)
             {
                 <option>@player.Name</option>
@@ -52,9 +52,7 @@
           </form>
     </div>
 </div>
-<div>
-    </div>
-    <a asp-page="Index">Back to List</a>
+
 </div>
 
 @section Scripts {
