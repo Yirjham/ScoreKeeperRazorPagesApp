@@ -17,7 +17,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group offset-4">
                 <input asp-for="Player.Name" class="form-control w-50" placeholder="Name" />
-                @*<span asp-validation-for="Player.Name" class="text-danger"></span>*@
             </div>
 
             <!-- Button to Open the Modal -->
@@ -27,60 +26,34 @@
             </div>
 
             <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
+              <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
       
-        <!-- Modal Header -->
-        <div class="modal-header">
-           
-              <h4 class="modal-title">Are you sure you want to add this user?</h4>
-                 
-          
-         @* <button type="button" class="close" data-dismiss="modal">&times;</button>*@
-        </div>
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                          <h4 class="modal-title">Add new user?</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
         
-        <!-- Modal body -->
-        <div class="modal-body">
-          Click <strong>Add</strong> if you want to proceed or <strong>Close</strong> if you think this user already exists
-        </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      Click <strong>Add</strong> to proceed or <strong>Close</strong> to enter a different name.
+                    </div>
         
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="submit" asp-page-handler="StayInPage" class="btn btn-danger">Add</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="submit" asp-page-handler="StayInPage" class="btn btn-danger">Add</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
         
-      </div>
-    </div>
-  </div>
-
-
-        </form>
-    </div>
-
-   @* <div class="col-6 ml-md-n3 mr-md-n3">
-        <img class="img-fluid mx-auto" src="~/images/a1static.jpg" alt="Scrabble Board" width="700px">
-    </div>*@
-    
+                  </div>
+                </div>
+              </div>
+      </form>
+    </div>  
 </div> 
-@*<div class="row">
-<div class="col-md-12 text-center jumbotron bg-info p-3 mb-0 text-light"  >
-    <h1 class="display-3">Add a new user</h1>
 </div>
-</div>*@
-
-</div>
-
-@*<div class="container mr-0">
-<div class="row pb-2">
-    <div class="col-md-12 list-group">
-        <a asp-page="/Game/SelectTwoPlayers" class="list-group-item list-group-item-action list-group-item-success text-center">Two Players</a>
-        <a asp-page="/Game/SelectThreePlayers" class="list-group-item list-group-item-action list-group-item-info text-center">Three Players</a>
-        <a asp-page="/Game/SelectFourPlayers" class="list-group-item list-group-item-action list-group-item-primary text-center">Four Players</a>
-    </div>
-</div>
-</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
