@@ -5,24 +5,25 @@
 }
 
 <div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
-    <h1 class="display-5">Add a new user</h1>
+    <h1 class="display-5">SCOREKEEPER</h1>
 </div>
 
 <div class="container pb-2">
-<div class="row pb-2">
+<div class="row">
     <div class="col-md-12" style="background-color: #bee5eb; ">
         <form method="post" asp-page-handler="StayInPage">
-            <h2 style="color: #17a2b8" class="p-3">Add player's name:</h2>
+            <h2 style="color: #17a2b8" class="pt-3 pb-1 text-center">Add User</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="Player.Name" class="form-control w-25" placeholder="Add player" />
-                <span asp-validation-for="Player.Name" class="text-danger"></span>
+            <div class="form-group offset-4">
+                <input asp-for="Player.Name" class="form-control w-50" placeholder="Name" />
+                @*<span asp-validation-for="Player.Name" class="text-danger"></span>*@
             </div>
 
             <!-- Button to Open the Modal -->
-            <div class="form-group">
-                <button type="button" value="Add" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add User</button>
+            <div class="form-group offset-4">
+                <button type="button" value="Add" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add</button>
+                <span asp-validation-for="@Model.Player.Name" class="error text-danger"></span>
             </div>
 
             <!-- The Modal -->
@@ -57,17 +58,29 @@
 
         </form>
     </div>
+
+   @* <div class="col-6 ml-md-n3 mr-md-n3">
+        <img class="img-fluid mx-auto" src="~/images/a1static.jpg" alt="Scrabble Board" width="700px">
+    </div>*@
     
 </div> 
+@*<div class="row">
+<div class="col-md-12 text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-3">Add a new user</h1>
+</div>
+</div>*@
+
 </div>
 
-<div class="row pb-2 ml-1">
+@*<div class="container mr-0">
+<div class="row pb-2">
     <div class="col-md-12 list-group">
-  <a asp-page="/Game/SelectTwoPlayers" class="list-group-item list-group-item-action list-group-item-success text-center">Two Players</a>
-  <a asp-page="/Game/SelectThreePlayers" class="list-group-item list-group-item-action list-group-item-info text-center">Three Players</a>
-  <a asp-page="/Game/SelectFourPlayers" class="list-group-item list-group-item-action list-group-item-primary text-center">Four Players</a>
+        <a asp-page="/Game/SelectTwoPlayers" class="list-group-item list-group-item-action list-group-item-success text-center">Two Players</a>
+        <a asp-page="/Game/SelectThreePlayers" class="list-group-item list-group-item-action list-group-item-info text-center">Three Players</a>
+        <a asp-page="/Game/SelectFourPlayers" class="list-group-item list-group-item-action list-group-item-primary text-center">Four Players</a>
+    </div>
 </div>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

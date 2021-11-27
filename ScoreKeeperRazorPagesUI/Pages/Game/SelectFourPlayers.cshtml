@@ -28,9 +28,9 @@
 
     <div class="col-md-12" style="background-color: #bee5eb;">
         <form method="post">
-        <h2 style="color: #17a2b8" class="p-3">Select four existing users</h2>
+        <h2 style="color: #17a2b8" class="pt-3 pb-1 text-center">Four Users</h2>
         <hr />
-          <select class="form-control w-25 mb-2" asp-for="@Model.Player1.Name">
+          <select class="form-control w-50 mb-2 offset-3" asp-for="@Model.Player1.Name">
             <option value="" selected disabled hidden>Select Player 1</option>
             @foreach(var player in @Model.Players)
             {
@@ -39,7 +39,7 @@
             
           </select>
 
-          <select class="form-control w-25 mb-2" asp-for="@Model.Player2.Name">
+          <select class="form-control w-50 mb-2 offset-3" asp-for="@Model.Player2.Name">
             <option value="" selected disabled hidden>Select Player 2</option>
             @foreach(var player in @Model.Players)
             {
@@ -47,7 +47,7 @@
             }
           </select>
 
-           <select class="form-control w-25 mb-2" asp-for="@Model.Player3.Name">
+           <select class="form-control w-50 mb-2 offset-3" asp-for="@Model.Player3.Name">
             <option value="" selected disabled hidden>Select Player 2</option>
             @foreach(var player in @Model.Players)
             {
@@ -55,7 +55,7 @@
             }
           </select>
 
-          <select class="form-control w-25 mb-2" asp-for="@Model.Player4.Name">
+          <select class="form-control w-50 mb-2 offset-3" asp-for="@Model.Player4.Name">
             <option value="" selected disabled hidden>Select Player 2</option>
             @foreach(var player in @Model.Players)
             {
@@ -64,7 +64,7 @@
           </select>
 
           <div>
-                <input type="submit" value="Start" class="btn btn-info mb-2" />
+                <input type="submit" value="Start" class="btn btn-info mb-2 offset-3" />
                  <span asp-validation-for="@Model.Player1.Name" class="error text-danger"></span>
           </div>
           </form>

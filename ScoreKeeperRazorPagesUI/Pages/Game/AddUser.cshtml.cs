@@ -27,16 +27,17 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
         public async Task<IActionResult> OnPostStayInPageAsync()
         {
-            if (!ModelState.IsValid)
+            Players = _context.Player.ToList();
+
+            List<Player> nameExists = Players.Where(p => p.Name.ToLower() == Player.Name.ToLower()).ToList();
+
+            if (nameExists.Count != 0)
             {
+                ModelState.AddModelError("Player.Name", "The user name already exists");
                 return Page();
             }
 
-            Players = _context.Player.ToList();
-
-            List<Player> nameExists = Players.Where(p => p.Name == Player.Name).ToList();
-
-            if (nameExists.Count != 0)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
