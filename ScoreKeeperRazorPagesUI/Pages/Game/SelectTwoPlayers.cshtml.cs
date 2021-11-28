@@ -22,10 +22,6 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty]
         public Player Player2 { get; set; }
 
-        //[BindProperty]
-        //public Player Player { get; set; }
-
-
         public IList<Player> Players { get; set; }
 
         public void OnGet()
@@ -48,18 +44,5 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
             return RedirectToPage("/Game/TwoPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name });
         }
-
-        //public async Task<IActionResult> OnPostStayInPageAsync()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-
-        //    _context.Player.Add(Player);
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToPage("/Game/SelectTwoPlayers");
-        //}
     }
 }
