@@ -66,7 +66,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Scoreboard");
         }
 
         private bool PlayerExists(int id)

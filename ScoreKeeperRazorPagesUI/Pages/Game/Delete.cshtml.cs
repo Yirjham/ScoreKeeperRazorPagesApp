@@ -53,7 +53,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Scoreboard");
         }
     }
 }

@@ -5,30 +5,42 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-5">EDIT NAME</h1>
+</div>
 
-<h4>Player</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Player.ID" />
-            <div class="form-group">
-                <label asp-for="Player.Name" class="control-label"></label>
-                <input asp-for="Player.Name" class="form-control" />
-                <span asp-validation-for="Player.Name" class="text-danger"></span>
+<div class="container pb-2">
+    <div class="row pb-4">
+        <div class="col-md-12 pb-1" style="background-color: #bee5eb;">
+            <h2 style="color: #17a2b8" class="pt-3 pb-1 text-center">Are you sure you want to edit the user name?</h2>
+
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Player.ID" />
+                        <div class="form-group">
+                            <label asp-for="Player.Name" class="control-label"><strong>NAME</strong></label>
+                            <input asp-for="Player.Name" class="form-control" />
+                            <span asp-validation-for="Player.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" /> |
+                            <a asp-page="/Game/Scoreboard">Back to Scoreboard</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
+         </div>
     </div>
-</div>
+@*</div>*@
 
-<div>
+
+@*<div>
     <a asp-page="./Index">Back to List</a>
-</div>
+</div>*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
