@@ -124,20 +124,13 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             
             if (GameWinner == null)
             {
-                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking on End Game");
-                //Players = _context.Player.ToList();
-                //Player1 = Players.Where(x => x.Name == Player1Name).FirstOrDefault();
-                //Player2 = Players.Where(x => x.Name == Player2Name).FirstOrDefault();
-                //Player3 = Players.Where(x => x.Name == Player3Name).FirstOrDefault();
-                //Player4 = Players.Where(x => x.Name == Player4Name).FirstOrDefault();
+                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking End Game button");
             }
 
             if (ModelState.IsValid == false)
             {
                 return RedirectToPage("/Game/FourPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name, Player4Name = Player4.Name });
             }
-
-
 
             if (GameWinner.TotalScore == Player1.TotalScore)
             {

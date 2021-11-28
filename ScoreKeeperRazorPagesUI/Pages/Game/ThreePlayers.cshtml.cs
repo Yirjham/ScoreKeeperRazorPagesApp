@@ -104,6 +104,16 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 GameWinner = Calculations.DeterminesWinner(Player1, Player2, Player3);
             }
 
+            if (GameWinner == null)
+            {
+                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking the End Game button");
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                return RedirectToPage("/Game/ThreePlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name });
+            }
+
             if (GameWinner.TotalScore == Player1.TotalScore)
             {
                 Player1.GamesWon++;
