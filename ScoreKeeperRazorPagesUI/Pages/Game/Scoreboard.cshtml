@@ -43,6 +43,7 @@
                 @Html.DisplayFor(modelItem => item.GamesWon)
             </td>
             <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit Name</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>

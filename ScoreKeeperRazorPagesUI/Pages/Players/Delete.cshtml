@@ -5,42 +5,52 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="text-center jumbotron bg-info p-3 mb-0 text-light"  >
+    <h1 class="display-5">DELETE</h1>
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Player</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Player.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Player.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Player.GamesPlayed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Player.GamesPlayed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Player.GamesWon)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Player.GamesWon)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Player.HighestGameScore)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Player.HighestGameScore)
-        </dd>
-    </dl>
+
+<div class="container pb-2">
+    <div class="row pb-2">
+        <div class="col-md-12 pb-1" style="background-color: #bee5eb;">
+            <h2 style="color: #17a2b8" class="pt-3 pb-1 text-center">Are you sure you want to delete this user?</h2>
+@*<h3>Are you sure you want to delete this?</h3>*@
+            <div>
+                <h4>Player</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Player.Name)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Player.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Player.GamesPlayed)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Player.GamesPlayed)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Player.GamesWon)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Player.GamesWon)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Player.HighestGameScore)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Player.HighestGameScore)
+                    </dd>
+                </dl>
     
-    <form method="post">
-        <input type="hidden" asp-for="Player.ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+                <form method="post">
+                    <input type="hidden" asp-for="Player.ID" />
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    <a asp-page="./Game/Scoreboard">Back to Scoreboard</a>
+                </form>
+            </div>
+         </div>
+    </div>
 </div>
