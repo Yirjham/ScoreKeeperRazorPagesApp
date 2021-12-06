@@ -124,7 +124,12 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             
             if (GameWinner == null)
             {
-                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking End Game button");
+                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking on End Game");
+                //Players = _context.Player.ToList();
+                //Player1 = Players.Where(x => x.Name == Player1Name).FirstOrDefault();
+                //Player2 = Players.Where(x => x.Name == Player2Name).FirstOrDefault();
+                //Player3 = Players.Where(x => x.Name == Player3Name).FirstOrDefault();
+                //Player4 = Players.Where(x => x.Name == Player4Name).FirstOrDefault();
             }
 
             if (ModelState.IsValid == false)
