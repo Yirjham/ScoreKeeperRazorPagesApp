@@ -52,6 +52,10 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty(SupportsGet = true)]
         public string Player4Name { get; set; }
 
+
+        [BindProperty(SupportsGet = true)]
+        public bool HasGameStarted { get; set; } = true;
+
         public IList<Player> Players { get; set; }
 
 
@@ -67,6 +71,11 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player2.ScoreSubtotal = ScoreSubtotalP2;
             Player3.ScoreSubtotal = ScoreSubtotalP3;
             Player4.ScoreSubtotal = ScoreSubtotalP4;
+
+            if (HasGameStarted == false)
+            {
+                ViewData["EmptySubtotals"] = "You can't end the game without submitting any scores. Try again.";
+            }
         }
         public IActionResult OnPost()
         {
@@ -81,7 +90,16 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player4.UpdateRoundSubtotal();
 
 
-            return RedirectToPage("/Game/FourPlayers", new { ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, ScoreSubtotalP3 = Player3.ScoreSubtotal, ScoreSubtotalP4 = Player4.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name, Player4Name = Player4.Name });
+            return RedirectToPage("/Game/FourPlayers", new { 
+                ScoreSubtotalP1 = Player1.ScoreSubtotal, 
+                ScoreSubtotalP2 = Player2.ScoreSubtotal, 
+                ScoreSubtotalP3 = Player3.ScoreSubtotal,
+                ScoreSubtotalP4 = Player4.ScoreSubtotal, 
+                Player1Name = Player1.Name, 
+                Player2Name = Player2.Name, 
+                Player3Name = Player3.Name, 
+                Player4Name = Player4.Name 
+            });
         }
 
         public IActionResult OnPostWinner()
@@ -120,39 +138,52 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             if (Calculations.IsThereAWinner(Player1.TotalScore, Player2.TotalScore, Player3.TotalScore, Player4.TotalScore) == true)
             {
                 GameWinner = Calculations.DeterminesGameWinner(Player1, Player2, Player3, Player4);
-            }
-            
-            if (GameWinner == null)
-            {
-                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking the END GAME button");
-                Players = _context.Player.ToList();
-                //Player1 = Players.Where(x => x.Name == Player1Name).FirstOrDefault();
-                //Player2 = Players.Where(x => x.Name == Player2Name).FirstOrDefault();
-                //Player3 = Players.Where(x => x.Name == Player3Name).FirstOrDefault();
-                //Player4 = Players.Where(x => x.Name == Player4Name).FirstOrDefault();
+
+                if (GameWinner.Name == Player1.Name)
+                {
+                    Player1.GamesWon++;
+                }
+                else if (GameWinner.Name == Player2.Name)
+                {
+                    Player2.GamesWon++;
+                }
+                else if (GameWinner.Name == Player3.Name)
+                {
+                    Player3.GamesWon++;
+                }
+                else
+                {
+                    Player4.GamesWon++;
+                }
+
             }
 
-            if (ModelState.IsValid == false)
+            bool areAllSubtotalsZero = false;
+            if (Player1.ScoreSubtotal == 0 && Player2.ScoreSubtotal == 0 && Player3.ScoreSubtotal == 0 && Player4.ScoreSubtotal == 0)
             {
-                return Page();
-                //return RedirectToPage("/Game/FourPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name, Player4Name = Player4.Name });
+                areAllSubtotalsZero = true;
             }
 
-            if (GameWinner.TotalScore == Player1.TotalScore)
+            bool areAllTotalScoresZero = false;
+            if (Player1.TotalScore == 0 && Player2.TotalScore == 0 && Player3.TotalScore == 0 && Player4.TotalScore == 0)
             {
-                Player1.GamesWon++;
+                areAllTotalScoresZero = true;
             }
-            else if (GameWinner.TotalScore == Player2.TotalScore)
+
+            if (GameWinner == null && areAllSubtotalsZero == true && areAllTotalScoresZero == true)
             {
-                Player2.GamesWon++;
-            }
-            else if (GameWinner.TotalScore == Player3.TotalScore)
-            {
-                Player3.GamesWon++;
-            }
-            else
-            {
-                Player4.GamesWon++;
+                return RedirectToPage("/Game/FourPlayers", new
+                {
+                    Player1Name = Player1.Name,
+                    Player2Name = Player2.Name,
+                    Player3Name = Player3.Name,
+                    Player4Name = Player4.Name,
+                    HasGameStarted = false,
+                    ScoreSubtotalP1 = Player1.ScoreSubtotal,
+                    ScoreSubtotalP2 = Player2.ScoreSubtotal,
+                    ScoreSubtotalP3 = Player3.ScoreSubtotal,
+                    ScoreSubtotalP4 = Player4.ScoreSubtotal
+                });
             }
 
             if (Player1.HighestGameScore < Player1.TotalScore)
