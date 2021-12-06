@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using ScoreKeeperRazorPagesUI.CalculationLibrary;
 using ScoreKeeperRazorPagesUI.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,10 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
         [BindProperty]
         public Player Player2 { get; set; }
-       
+
+        [BindProperty(SupportsGet = true)]
+        public bool HasGameStarted { get; set; } = true;
+
         public IList<Player> Players { get; set; }
         public void OnGet()
         {
@@ -43,6 +47,11 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
             Player1.ScoreSubtotal = ScoreSubtotalP1;
             Player2.ScoreSubtotal = ScoreSubtotalP2;
+
+            if (HasGameStarted == false)
+            {
+                ViewData["EmptySubtotals"] = "You can't end the game without submitting any scores. Try again.";
+            }
         }
 
         public IActionResult OnPost()
@@ -55,7 +64,12 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player1.UpdateRoundSubtotal();
             Player2.UpdateRoundSubtotal();
 
-            return RedirectToPage("/Game/TwoPlayers", new {ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name });
+            return RedirectToPage("/Game/TwoPlayers", new {
+                ScoreSubtotalP1 = Player1.ScoreSubtotal, 
+                ScoreSubtotalP2 = Player2.ScoreSubtotal, 
+                Player1Name = Player1.Name, 
+                Player2Name = Player2.Name 
+            });
         }
 
         public IActionResult OnPostWinner()
@@ -80,13 +94,43 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player1.GamesPlayed++;
             Player2.GamesPlayed++;
 
-            if (Player1.TotalScore > Player2.TotalScore)
+            Player GameWinner = null;
+            if (Calculations.IsThereAWinner(Player1.TotalScore, Player2.TotalScore) == true)
             {
-                Player1.GamesWon++;
+                GameWinner = Calculations.DeterminesGameWinner(Player1, Player2);
+
+                if (GameWinner.Name == Player1.Name)
+                {
+                    Player1.GamesWon++;
+                }
+                else
+                {
+                    Player2.GamesWon++;
+                }
             }
-            else if (Player1.TotalScore < Player2.TotalScore)
+
+            bool areAllSubtotalsZero = false;
+            if (Player1.ScoreSubtotal == 0 && Player2.ScoreSubtotal == 0)
             {
-                Player2.GamesWon++;
+                areAllSubtotalsZero = true;
+            }
+
+            bool areAllTotalScoresZero = false;
+            if (Player1.TotalScore == 0 && Player2.TotalScore == 0)
+            {
+                areAllTotalScoresZero = true;
+            }
+
+            if (GameWinner == null && areAllSubtotalsZero == true && areAllTotalScoresZero == true)
+            {
+                return RedirectToPage("/Game/TwoPlayers", new
+                {
+                    Player1Name = Player1.Name,
+                    Player2Name = Player2.Name,
+                    HasGameStarted = false,
+                    ScoreSubtotalP1 = Player1.ScoreSubtotal,
+                    ScoreSubtotalP2 = Player2.ScoreSubtotal
+                });
             }
 
             if (Player1.HighestGameScore < Player1.TotalScore)

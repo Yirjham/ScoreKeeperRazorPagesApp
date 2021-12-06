@@ -81,7 +81,8 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 ScoreSubtotalP3 = Player3.ScoreSubtotal, 
                 Player1Name = Player1.Name, 
                 Player2Name = Player2.Name, 
-                Player3Name = Player3.Name });
+                Player3Name = Player3.Name 
+            });
         }
 
         public IActionResult OnPostWinner()
