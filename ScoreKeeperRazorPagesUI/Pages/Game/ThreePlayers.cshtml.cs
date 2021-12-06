@@ -43,6 +43,9 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty(SupportsGet = true)]
         public string Player3Name { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public bool areSubtotalsEmpty { get; set; } = false;    
+
         public IList<Player> Players { get; set; }
 
         public void OnGet()
@@ -55,6 +58,11 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player1.ScoreSubtotal = ScoreSubtotalP1;
             Player2.ScoreSubtotal = ScoreSubtotalP2;
             Player3.ScoreSubtotal = ScoreSubtotalP3;
+
+            if (areSubtotalsEmpty ==  true)
+            {
+                ViewData["EmptySubtotals"] = "You can't end the game without submitting any scores. Try again";
+            }
         }
         public IActionResult OnPost()
         {
@@ -67,8 +75,8 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player2.UpdateRoundSubtotal();
             Player3.UpdateRoundSubtotal();
 
-
-            return RedirectToPage("/Game/ThreePlayers", new { ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, ScoreSubtotalP3 = Player3.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name });
+            return RedirectToPage("/Game/ThreePlayers", new { ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, 
+                ScoreSubtotalP3 = Player3.ScoreSubtotal, Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name });
         }
 
         public IActionResult OnPostWinner()
@@ -99,32 +107,33 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             Player3.GamesPlayed++;
 
             Player GameWinner = null;
+
             if (Calculations.IsThereAWinner(Player1.TotalScore,Player2.TotalScore, Player3.TotalScore) == true)
             {
-                GameWinner = Calculations.DeterminesWinner(Player1, Player2, Player3);
+                GameWinner = Calculations.DeterminesGameWinner(Player1, Player2, Player3);
+
+                if (GameWinner.Name == Player1.Name)
+                {
+                    Player1.GamesWon++;
+                }
+                else if (GameWinner.Name == Player2.Name)
+                {
+                    Player2.GamesWon++;
+                }
+                else
+                {
+                    Player3.GamesWon++;
+                }
             }
 
-            if (GameWinner == null)
+            if (GameWinner == null && Player1.ScoreSubtotal == 0 && Player2.ScoreSubtotal == 0 && Player3.ScoreSubtotal == 0 
+                && Player1.TotalScore == 0 && Player2.TotalScore == 0 && Player3.TotalScore == 0)
             {
-                ModelState.AddModelError("Player1.TotalScore", "You haven't played. Enter scores before clicking the End Game button");
-            }
-
-            if (ModelState.IsValid == false)
-            {
-                return RedirectToPage("/Game/ThreePlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name });
-            }
-
-            if (GameWinner.TotalScore == Player1.TotalScore)
-            {
-                Player1.GamesWon++;
-            }
-            else if (GameWinner.TotalScore == Player2.TotalScore)
-            {
-                Player2.GamesWon++;
-            }
-            else
-            {
-                Player3.GamesWon++;
+                //ViewData["EmptySubtotals"] = "You haven't played. Enter scores before clicking the END GAME button";
+                //ModelState.AddModelError("Player1.ScoreSubtotal", "You haven't played. Enter scores before clicking the END GAME button");
+                //return Page();
+                return RedirectToPage("/Game/ThreePlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name, areSubtotalsEmpty = true,
+                    ScoreSubtotalP1 = Player1.ScoreSubtotal, ScoreSubtotalP2 = Player2.ScoreSubtotal, ScoreSubtotalP3 = Player3.ScoreSubtotal});
             }
 
             if (Player1.HighestGameScore < Player1.TotalScore)
