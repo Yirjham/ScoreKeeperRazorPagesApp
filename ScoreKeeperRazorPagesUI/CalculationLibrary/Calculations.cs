@@ -112,39 +112,5 @@ namespace ScoreKeeperRazorPagesUI.CalculationLibrary
             }
             return output;
         }
-
-        public static List<Player> ReturnsLosers(Player player1, Player player2)
-        {
-            List<Player> allPlayers = new List<Player> { player1, player2 };
-
-            allPlayers = allPlayers.OrderByDescending(t => t.TotalScore).ToList();
-            allPlayers.RemoveAt(0); // Removes winner from list
-            List<Player> losers = allPlayers;
-
-            return losers;
-        }
-        public static List<Player> ReturnsLosers(Player player1, Player player2, Player player3)
-        {
-            List<Player> allPlayers = new List<Player> { player1, player2, player3 };
-
-            allPlayers = allPlayers.OrderByDescending(t => t.TotalScore).ToList();
-            allPlayers.RemoveAt(0); // Removes winner from list
-            List<Player> losers = allPlayers;
-
-            return losers;
-        }
-
-        public static List<Player> ReturnsLosers(Player player1, Player player2, Player player3, Player player4)
-        {
-            List<Player> allPlayers = new List<Player> { player1, player2, player3, player4 };
-
-            allPlayers = allPlayers.OrderByDescending(t => t.TotalScore).ToList();
-            allPlayers.RemoveAt(0); // Removes winner from list
-            List<Player> losers = allPlayers;
-
-            return losers;
-        }
-
-
     }
 }
