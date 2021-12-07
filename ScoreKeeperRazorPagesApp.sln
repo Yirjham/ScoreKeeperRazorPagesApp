@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScoreKeeperRazorPagesUI", "ScoreKeeperRazorPagesUI\ScoreKeeperRazorPagesUI.csproj", "{495D3EEA-0F9D-426A-9EEE-6762AC139981}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScorekeeperRazorPagesTests", "ScorekeeperRazorPagesTests\ScorekeeperRazorPagesTests.csproj", "{F563DD64-B676-470B-96B7-1E43A345B6F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{495D3EEA-0F9D-426A-9EEE-6762AC139981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{495D3EEA-0F9D-426A-9EEE-6762AC139981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{495D3EEA-0F9D-426A-9EEE-6762AC139981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F563DD64-B676-470B-96B7-1E43A345B6F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F563DD64-B676-470B-96B7-1E43A345B6F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F563DD64-B676-470B-96B7-1E43A345B6F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F563DD64-B676-470B-96B7-1E43A345B6F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

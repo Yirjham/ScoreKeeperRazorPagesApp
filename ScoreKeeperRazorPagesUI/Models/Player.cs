@@ -13,6 +13,10 @@ namespace ScoreKeeperRazorPagesUI.Models
         {
 
         }
+        public Player(string name)
+        {
+            Name = name;
+        }
         public int ID { get; set; }
 
         [Display(Name = "NAME")]
