@@ -7,12 +7,6 @@ namespace ScoreKeeperRazorPagesUI.CalculationLibrary
 {
     public class Calculations
     {
-        /// <summary>
-        /// Determines the round highest scorer, it has 3 overloads: 2, 3 and 4 players
-        /// </summary>
-        /// <param name="player1">First Player</param>
-        /// <param name="player2">Second Player</param>
-        /// <returns>Returns a Player instance</returns>
         public static Player DeterminesRoundHighestScorer(Player player1, Player player2)
         {
             Player roundWinner = null;
@@ -35,12 +29,6 @@ namespace ScoreKeeperRazorPagesUI.CalculationLibrary
             return winner;
         }
 
-        /// <summary>
-        /// Determines the game winner, it has 3 overloads: 2, 3 and 4 players
-        /// </summary>
-        /// <param name="player1">First Player</param>
-        /// <param name="player2">Second Player</param>
-        /// <returns></returns>
         public static Player DeterminesWinner(Player player1, Player player2)
         {
 
@@ -80,11 +68,7 @@ namespace ScoreKeeperRazorPagesUI.CalculationLibrary
             }
             return winner;
         }
-        /// <summary>
-        /// Takes in as many players' scores as needed and compares the top two scores
-        /// </summary>
-        /// <param name="playersScores">Scores go into an array that gets sorted</param>
-        /// <returns>True if there is a winner or false if the top score is shared by at least two players</returns>
+
         public static bool IsThereAWinner(params int[] playersScores)
         {
             Array.Sort(playersScores);

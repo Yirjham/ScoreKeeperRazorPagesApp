@@ -52,7 +52,6 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty(SupportsGet = true)]
         public string Player4Name { get; set; }
 
-
         [BindProperty(SupportsGet = true)]
         public bool HasGameStarted { get; set; } = true;
 

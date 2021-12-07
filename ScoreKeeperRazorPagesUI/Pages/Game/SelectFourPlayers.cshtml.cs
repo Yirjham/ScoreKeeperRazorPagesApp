@@ -53,18 +53,5 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
 
             return RedirectToPage("/Game/FourPlayers", new { Player1Name = Player1.Name, Player2Name = Player2.Name, Player3Name = Player3.Name, Player4Name = Player4.Name });
         }
-
-        //public async Task<IActionResult> OnPostStayInPageAsync()
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return Page();
-        //    }
-
-        //    _context.Player.Add(Player);
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToPage("/Game/SelectFourPlayers");
-        //}
     }
 }
