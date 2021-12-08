@@ -278,5 +278,26 @@ namespace ScorekeeperRazorPagesTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Theory]
+        [InlineData(130, 131, 131)]
+        [InlineData(130, 129, 130)]
+        [InlineData(130, 130, 130)]
+        [InlineData(1, 2, 2)]
+        [InlineData(1, 1, 1)]
+        [InlineData(0, 230, 230)]
+        [InlineData(300, 315, 315)]
+        public void ShouldReturnHighestScore(int newScore, int oldScore, int expected)
+        {
+            // Arrange
+
+            // Act
+
+            int actual = Calculations.UpdatesHighestScore(newScore, oldScore);
+
+            // Assert
+
+            Assert.Equal(expected, actual);
+        }
     }
 }

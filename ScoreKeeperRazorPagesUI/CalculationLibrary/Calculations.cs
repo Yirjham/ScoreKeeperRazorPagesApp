@@ -96,5 +96,16 @@ namespace ScoreKeeperRazorPagesUI.CalculationLibrary
             }
             return output;
         }
+
+        public static int UpdatesHighestScore(int newScore, int oldScore)
+        {
+            int output = oldScore;
+
+            if (newScore > oldScore)
+            {
+                output = newScore;
+            }
+            return output;
+        }
     }
 }

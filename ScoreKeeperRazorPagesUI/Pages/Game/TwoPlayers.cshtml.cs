@@ -98,15 +98,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             if (Calculations.IsThereAWinner(Player1.TotalScore, Player2.TotalScore) == true)
             {
                 GameWinner = Calculations.DeterminesGameWinner(Player1, Player2);
-
-                if (GameWinner.Name == Player1.Name)
-                {
-                    Player1.GamesWon++;
-                }
-                else
-                {
-                    Player2.GamesWon++;
-                }
+                GameWinner.GamesWon++;
             }
 
             bool areAllSubtotalsZero = false;
@@ -133,16 +125,9 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 });
             }
 
-            if (Player1.HighestGameScore < Player1.TotalScore)
-            {
-                Player1.HighestGameScore = Player1.TotalScore;
-            }
-
-            if (Player2.HighestGameScore < Player2.TotalScore)
-            {
-                Player2.HighestGameScore = Player2.TotalScore;
-            }
-
+            Player1.HighestGameScore = Calculations.UpdatesHighestScore(Player1.TotalScore, Player1.HighestGameScore);
+            Player2.HighestGameScore = Calculations.UpdatesHighestScore(Player2.TotalScore, Player2.HighestGameScore);
+           
             _context.SaveChanges();
             return RedirectToPage("/Game/Scoreboard");
         }

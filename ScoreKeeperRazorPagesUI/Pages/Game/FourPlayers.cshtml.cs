@@ -137,23 +137,7 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
             if (Calculations.IsThereAWinner(Player1.TotalScore, Player2.TotalScore, Player3.TotalScore, Player4.TotalScore) == true)
             {
                 GameWinner = Calculations.DeterminesGameWinner(Player1, Player2, Player3, Player4);
-
-                if (GameWinner.Name == Player1.Name)
-                {
-                    Player1.GamesWon++;
-                }
-                else if (GameWinner.Name == Player2.Name)
-                {
-                    Player2.GamesWon++;
-                }
-                else if (GameWinner.Name == Player3.Name)
-                {
-                    Player3.GamesWon++;
-                }
-                else
-                {
-                    Player4.GamesWon++;
-                }
+                GameWinner.GamesWon++;
 
             }
 
@@ -185,25 +169,10 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
                 });
             }
 
-            if (Player1.HighestGameScore < Player1.TotalScore)
-            {
-                Player1.HighestGameScore = Player1.TotalScore;
-            }
-
-            if (Player2.HighestGameScore < Player2.TotalScore)
-            {
-                Player2.HighestGameScore = Player2.TotalScore;
-            }
-
-            if (Player3.HighestGameScore < Player3.TotalScore)
-            {
-                Player3.HighestGameScore = Player3.TotalScore;
-            }
-
-            if (Player4.HighestGameScore < Player4.TotalScore)
-            {
-                Player4.HighestGameScore = Player4.TotalScore;
-            }
+            Player1.HighestGameScore = Calculations.UpdatesHighestScore(Player1.TotalScore, Player1.HighestGameScore);
+            Player2.HighestGameScore = Calculations.UpdatesHighestScore(Player2.TotalScore, Player2.HighestGameScore);
+            Player3.HighestGameScore = Calculations.UpdatesHighestScore(Player3.TotalScore, Player3.HighestGameScore);
+            Player4.HighestGameScore = Calculations.UpdatesHighestScore(Player4.TotalScore, Player4.HighestGameScore);
 
             _context.SaveChanges();
             return RedirectToPage("/Game/Scoreboard");
