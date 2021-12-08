@@ -22,11 +22,12 @@
 
 ## Overview
 
-* ### Add players, add scores, tally results and display them in the scoreboard
+* ### Add players and their scores during each round. Tally the results and display them in the scoreboard
 
 ![Main Functionality](AppGifs/RazorPagesScorekeeper.gif)
 
-* ### Edit a player's name 
+* ### Edit players' names
+##### (Editing scores without playing would be cheating so it is not allowed)
 
 ![Edit Player](AppGifs/edit.gif)
 
@@ -36,7 +37,7 @@
 
 ## Data Validation
 
-* ### App doesn't accept the same name twice
+* ### The app doesn't accept the same name twice
 
 ![Same-name-entered-twice validation](AppGifs/SameUserValidation.gif)
 
@@ -44,11 +45,11 @@
 
 ![Same-user-selected-twice validation](AppGifs/SelectingSameUserVal.gif)
 
-* ### A game can't be ended without entering any scores
+* ### Users can't enter null/empty data to the database
 
 ![Force user to enter scores validation](AppGifs/NoStartVal.gif)
 
-* ### No negative scores allowed
+* ### Negative scores are not allowed
 
 ![No-negative-numbers validation](AppGifs/NegativeNumVal.gif)
 
