@@ -28,9 +28,6 @@ namespace ScoreKeeperRazorPagesUI.Pages.Game
         [BindProperty]
         public Player Player4 { get; set; }
 
-        //[BindProperty]
-        //public Player Player { get; set; }
-
         public IList<Player> Players { get; set; }
 
         public void OnGet()
